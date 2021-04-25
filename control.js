@@ -1,3 +1,3 @@
 $(window).on('load', () =>{
-    $("a").addClass('yeet')
+    $('a[href*="' + location.pathname.substring(location.pathname.lastIndexOf('/') + 1) + '"]').addClass('current')
 });

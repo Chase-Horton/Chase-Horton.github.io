@@ -49,5 +49,5 @@
     75% {transform: translate(0px, 0px); opacity: 1; transform:rotate(25deg);}
 }
 .current{
-    color:green;
+    text-decoration: underline;
 }
