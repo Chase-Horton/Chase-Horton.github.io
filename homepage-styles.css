@@ -1,0 +1,14 @@
+#navBar{
+    animation-name: nav;
+    animation-duration: 3s;
+    animation-fill-mode: backwards;
+    background-color: #1C1C1C;
+}
+.navBar{
+    color: white;
+}
+
+@keyframes nav {
+    from{transform: translateY(-200px)}
+    to{transform: translateY(0px)}
+}
