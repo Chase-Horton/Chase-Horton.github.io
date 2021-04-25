@@ -1,6 +1,6 @@
 #navBarAnimated{
     animation-name: nav;
-    animation-duration: 3s;
+    animation-duration: 2s;
     animation-fill-mode: backwards;
     background-color: #1C1C1C;
 }
@@ -14,28 +14,33 @@
 #home{
     animation-name:slideUp;
     animation-duration: 2s;
-    animation-delay: 2s;
+    animation-delay: 1.5s;
     animation-fill-mode: backwards;
 }
 #projects{
     animation-name:slideUp;
     animation-duration: 2s;
-    animation-delay: 2.25s;
+    animation-delay: 1.75s;
     animation-fill-mode: backwards;
 }
 #about{
     animation-name:slideUp;
     animation-duration: 2s;
-    animation-delay: 2.5s;
+    animation-delay: 2s;
     animation-fill-mode: backwards;
 }
 #contact{
     animation-name:slideUp;
     animation-duration: 2s;
-    animation-delay: 2.75s;
+    animation-delay: 2.25s;
     animation-fill-mode: backwards;
 }
-
+#terminal{
+    animation-name:slideUp;
+    animation-duration: 2s;
+    animation-delay: 2.5s;
+    animation-fill-mode: backwards;
+}
 
 
 @keyframes nav {
