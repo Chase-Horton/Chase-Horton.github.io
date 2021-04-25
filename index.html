@@ -5,18 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="tailwind.css" rel="stylesheet">
   <link href="homepage-styles.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="control.js"></script>
 </head>
 <body>
-<div class="h-screen flex-wrap bg-gradient-to-br from-red-600 to-red-200">
-  <header id="navBar" class="h-20 flex justify-start pt-4 text-2xl rounded-b-2xl">
-    <div class="navBar">
-      <a id="home" href="#" class="ml-8">Home</a>
-      <a id="projects" href="#" class="ml-8">Projects</a>
-      <a id="about" href="#" class="ml-8">About me</a>
-      <a id="about" href="#" class="ml-8">Contact</a>
-    </div>
-  </header>
-  <div></div>
-</div>
+  <div class="h-screen flex-wrap bg-gradient-to-br from-red-600 to-red-200">
+    <header id="navBarAnimated" class="h-20 flex justify-start pt-4 text-2xl rounded-b-2xl">
+      <div class="navBar flex">
+        <div id="home"><a href="index.html" class="ml-8 hover:text-gray-400 underline">Home</a></div>
+        <div id="projects"><a href="projects.html" class="ml-8 hover:text-gray-400">Projects</a></div>
+        <div id="about"><a href="#" class="ml-8 hover:text-gray-400">About me</a></div>
+        <div id="contact"><a href="#" class="ml-8 hover:text-gray-400">Contact</a></div>
+      </div>
+    </header>
+    <div></div>
+  </div>
 </body>
 </html>
