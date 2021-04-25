@@ -1,4 +1,3 @@
-//function to getCookie from https://www.w3schools.com/js/js_cookies.asp
 function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -14,11 +13,13 @@ function getCookie(cname) {
     }
     return "";
 }
-$(window).on('load', () =>{
-    $('a[href*="' + location.pathname.substring(location.pathname.lastIndexOf('/') + 1) + '"]').addClass('current');
-    if(getCookie('animation') == 'false'){
-        console.log('Already Animated')
-        $('div.navBar div').removeAttr('id');
-        $('header').attr('id', 'navBar');
+$(window).on('load', function(){
+    if(getCookie('animation') != 'false'){
+        let date = new Date();
+        let min = 1;
+        date.setTime(date.getTime()+(min*60*1000));
+        console.log(date.toUTCString())
+        document.cookie = "animation=false; expires=" + date + '; path=/';
     }
-});
+
+})
