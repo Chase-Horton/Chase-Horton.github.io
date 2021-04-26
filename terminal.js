@@ -21,7 +21,7 @@ $('#terminalDiv').terminal({
 CTRL + L                |   Clears the screen
 ls                      |   Lists files in current directory
 cat FILENAME            |   Prints contents of FILENAME
-touch FILENAME CONTENT  |   Create File with FILENAME containing CONTENT
+touch FILENAME 'CONTENT'|   Create File with FILENAME containing CONTENT (note: content of the file must be in single or double quotes)
 rm FILENAME             |   Deletes FILENAME
 cd LOCATION             |   Change current directory to LOCATION
 mkdir DIR               |   Create a directory with name DIR`
@@ -87,7 +87,7 @@ mkdir DIR               |   Create a directory with name DIR`
     }
     }, 
     {
-        greetings: 'Welcome to my interactive terminal. Type Help for more information.',
+        greetings: 'Welcome to my interactive terminal. Type help for more information.',
         completion: true,
     }
 
