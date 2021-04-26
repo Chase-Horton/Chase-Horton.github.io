@@ -45,7 +45,7 @@ mkdir DIR               |   Create a directory with name DIR`
         if(files[loc][fileName] == undefined){
             this.echo('Invalid File Name.')
         } else{
-            this.echo(files[fileName]);
+            this.echo(files[loc][fileName]);
         }
 
     },
