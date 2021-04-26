@@ -10,11 +10,11 @@ $('#terminalDiv').terminal({
         },
     help : function(){
         this.echo(`For more information on any command press type help COMMAND-NAME
-CTRL + L                |Clears the screen
-ls                      |Lists files in current directory
-cat FILENAME            |Prints contents of FILENAME
-touch FILENAME CONTENT  |Create File with FILENAME containing CONTENT
-rm FILENAME             |Deletes FILENAME`
+CTRL + L                |   Clears the screen
+ls                      |   Lists files in current directory
+cat FILENAME            |   Prints contents of FILENAME
+touch FILENAME CONTENT  |   Create File with FILENAME containing CONTENT
+rm FILENAME             |   Deletes FILENAME`
 );
     },
     ls : function(){
