@@ -24,7 +24,8 @@
           \ \__\ \____\\ \_\ \ \_\ \_\ \_\ \_\ \_\ \_\ \__/.\_\/\____\                  
            \/__/\/____/ \/_/  \/_/\/_/\/_/\/_/\/_/\/_/\/__/\/_/\/____/                  
                                                                                          */
-                                                                                                                                                                        
+let x = `oooooo   oooooo     oooo           oooo                                                  \n \`888.    \`888.     .8'            \`888                                                  \n  \`888.   .8888.   .8'    .ooooo.   888   .ooooo.   .ooooo.  ooo. .oo.  .oo.    .ooooo.  \n   \`888  .8'\`888. .8'    d88' \`88b  888  d88' \`"Y8 d88' \`88b \`888P"Y88bP"Y88b  d88' \`88b \n    \`888.8'  \`888.8'     888ooo888  888  888       888   888  888   888   888  888ooo888 \n     \`888'    \`888'      888    .o  888  888   .o8 888   888  888   888   888  888    .o \n      \`8'      \`8'       \`Y8bod8P' o888o \`Y8bod8P' \`Y8bod8P' o888o o888o o888o \`Y8bod8P' \n                                                                                         \n                                                                                         \n                                                                                         \n    .                                              \n  .o8                                              \n.o888oo  .ooooo.     ooo. .oo.  .oo.   oooo    ooo \n  888   d88' \`88b    \`888P"Y88bP"Y88b   \`88.  .8'  \n  888   888   888     888   888   888    \`88..8'   \n  888 . 888   888     888   888   888     \`888'    \n  "888" \`Y8bod8P'    o888o o888o o888o     .8'     \n                                       .o..P'      \n                                       \`Y8P'       \n                                                   \n                      oooo   o8o                               .                                         o8o                        oooo  \n                      \`888   \`"'                             .o8                                         \`"'                        \`888  \n .ooooo.  ooo. .oo.    888  oooo  ooo. .oo.    .ooooo.     .o888oo  .ooooo.  oooo d8b ooo. .oo.  .oo.   oooo  ooo. .oo.    .oooo.    888  \nd88' \`88b \`888P"Y88b   888  \`888  \`888P"Y88b  d88' \`88b      888   d88' \`88b \`888""8P \`888P"Y88bP"Y88b  \`888  \`888P"Y88b  \`P  )88b   888  \n888   888  888   888   888   888   888   888  888ooo888      888   888ooo888  888      888   888   888   888   888   888   .oP"888   888  \n888   888  888   888   888   888   888   888  888    .o      888 . 888    .o  888      888   888   888   888   888   888  d8(  888   888  \n\`Y8bod8P' o888o o888o o888o o888o o888o o888o \`Y8bod8P'      "888" \`Y8bod8P' d888b    o888o o888o o888o o888o o888o o888o \`Y888""8o o888o
+\nType help for more information, and to clear this greeting.`
 let greeting =` _    _ ____ __   ___ _____ __  __ ____    ____ _____    __  __ _  _    _____ _  _ __   ____ _  _ ____ 
 ( \\/\\/ ( ___(  ) / __(  _  (  \\/  ( ___)  (_  _(  _  )  (  \\/  ( \\/ )  (  _  ( \\( (  ) (_  _( \\( ( ___)
  )    ( )__) )(_( (__ )(_)( )    ( )__)     )(  )(_)(    )    ( \\  /    )(_)( )  ( )(__ _)(_ )  ( )__) 
@@ -67,6 +68,10 @@ let files = {
 let repo = {}
 $('#terminalDiv').terminal({
     help : function(){
+        if(x != undefined){
+            this.clear()
+            x = undefined;
+        }
         this.echo(`For more information on any command press type help COMMAND-NAME
 clear   or    CTRL + L  |   Clears the screen
 ls                      |   Lists files in current directory
@@ -216,7 +221,7 @@ mkdir DIR               |   Create a directory with name DIR`
     }
     }, 
     {
-        greetings: 'Welcome to my online terminal. Type help for more information...',
+        greetings: x /*'Welcome to my online terminal. Type help for more information...'*/,
         completion: true,
         checkArity: false,
     }
