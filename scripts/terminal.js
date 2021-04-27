@@ -139,7 +139,7 @@ mkdir DIR               |   Create a directory with name DIR`
         if(option == 'add'){
             if(files[filename]!= undefined){
                 repo[filename] = files[filename]
-                this.echo('Commited ' + filename + ' to your local repository.');
+                this.echo('Commited ' + filename + ' to your local repository.\nPlease run git push to initialize repository before running git status');
                 console.log(repo)
             } else{
                 this.echo('Invalid file name.');
