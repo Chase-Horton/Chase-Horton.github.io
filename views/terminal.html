@@ -9,6 +9,7 @@
     <script src='../scripts/stopAnim.js'></script>
     <script src="https://unpkg.com/jquery.terminal/js/jquery.terminal.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css"/>
+    <link rel="stylesheet" href="../styles/terminal.css"/>
     <link href="../styles/tailwind.css" rel="stylesheet">
     <link href="../styles/homepage-styles.css" rel="stylesheet">
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
@@ -25,8 +26,12 @@
             <a href="terminal.html" class="ml-4 md:ml-8 hover:text-gray-400">Terminal</a>
             </div>
         </header>
-        <div id='terminalDiv' class='text-lg'></div>
+        <div class="tv h-full">
+            <div id="terminalDiv"></div>
+            <div class="flicker"></div>
+            <div class="scanlines"></div>
+        </div>
         <script src='../scripts/terminal.js'></script>
-    </div
+    </div>
 </body>
 </html>
