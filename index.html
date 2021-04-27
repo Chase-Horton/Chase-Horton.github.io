@@ -5,21 +5,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="control.js"></script>
-  <script src='stopAnim.js'></script>
-  <link href="tailwind.css" rel="stylesheet">
-  <link href="homepage-styles.css" rel="stylesheet">
+  <script src="../scripts/control.js"></script>
+  <script src='../scripts/stopAnim.js'></script>
+  <link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css"/>
+  <link href="../styles/tailwind.css" rel="stylesheet">
+  <link href="../styles/homepage-styles.css" rel="stylesheet">
   <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
 </head>
 <body>
   <div class="h-screen flex-wrap bg-gradient-to-br from-red-600 to-red-200">
     <header id="navBarAnimated" class="h-20 flex justify-start pt-4 text-2xl rounded-b-2xl">
       <div class="navBar flex text-base md:text-3xl">
-        <div id="home"><a href="index.html" class="underline ml-4 md:ml-8 hover:text-gray-400">Home</a></div>
-        <div id="projects"><a href="projects.html" class="ml-4 md:ml-8 hover:text-gray-400">Projects</a></div>
-        <div id="about"><a href="#" class="ml-4 md:ml-8 hover:text-gray-400">About me</a></div>
-        <div id="contact"><a href="#" class="ml-4 md:ml-8 hover:text-gray-400">Contact</a></div>
-        <div id="terminal"><a href="terminal.html" class="ml-4 md:ml-8 hover:text-gray-400">Terminal</a>
+        <div id="home"><a href="/" class="underline ml-4 md:ml-8 hover:text-gray-400">Home</a></div>
+        <div id="projects"><a href="views/projects.html" class="ml-4 md:ml-8 hover:text-gray-400">Projects</a></div>
+        <div id="about"><a href="views/about.html" class="ml-4 md:ml-8 hover:text-gray-400">About me</a></div>
+        <div id="contact"><a href="views/contact.html" class="ml-4 md:ml-8 hover:text-gray-400">Contact</a></div>
+        <div id="terminal"><a href="views/terminal.html" class="ml-4 md:ml-8 hover:text-gray-400">Terminal</a>
       </div>
     </header>
   </div>
