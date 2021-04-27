@@ -201,11 +201,12 @@ mkdir DIR               |   Create a directory with name DIR`
             }
         } else if(option == 'commit'){
             for(const folder in repo){
-                repo[folder] = files[folder];
+                repo[folder] = JSON.parse(JSON.stringify(files[folder]));
             }
+            console.log(repo)
         } else if(option == 'restore'){
             for(const folder in repo){
-                files[folder] = repo[folder]
+                files[folder] = JSON.parse(JSON.stringify(repo[folder]));
                 this.echo('Restored directory to last commit')
             }
         }
