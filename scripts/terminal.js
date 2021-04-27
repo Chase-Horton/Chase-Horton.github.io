@@ -113,7 +113,7 @@ mkdir DIR               |   Create a directory with name DIR`
     }
     }, 
     {
-        greetings: greeting,
+        greetings: 'Welcome to my online terminal. Type help for more information...',
         completion: true,
     }
 
