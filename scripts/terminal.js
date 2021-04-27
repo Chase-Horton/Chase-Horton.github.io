@@ -140,7 +140,6 @@ mkdir DIR               |   Create a directory with name DIR`
             if(files[filename]!= undefined){
                 repo[filename] = files[filename]
                 this.echo('Commited ' + filename + ' to your local repository.\nPlease run git push to initialize repository before running git status');
-                console.log(repo)
             } else{
                 this.echo('Invalid file name.');
             }
@@ -181,8 +180,6 @@ mkdir DIR               |   Create a directory with name DIR`
             for(const folder in repo){
                 Object.assign(allFiles, JSON.parse(JSON.stringify(files[folder])), JSON.parse(JSON.stringify(repo[folder])))
             }
-            console.log(allFiles)
-            console.log('repo', repo)
             for(const folder in repo){
                 this.echo(`-${folder}`)
                 for(const file in allFiles){
@@ -202,7 +199,6 @@ mkdir DIR               |   Create a directory with name DIR`
             for(const folder in repo){
                 files[folder] = $.extend(true,{},repo[folder]);
             }
-            console.log(repo);
         } else if(option == 'commit'){
             for(const folder in repo){
                 repo[folder] = files[folder];

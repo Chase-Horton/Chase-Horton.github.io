@@ -17,7 +17,6 @@ function getCookie(cname) {
 $(window).on('load', () =>{
     $('a[href*="' + location.pathname.substring(location.pathname.lastIndexOf('/') + 1) + '"]').addClass('current');
     if(getCookie('animation') == 'false'){
-        console.log('Already Animated')
         $('div.navBar div').removeAttr('id');
         $('header').attr('id', 'navBar');
     }

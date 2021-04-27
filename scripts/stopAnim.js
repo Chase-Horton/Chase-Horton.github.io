@@ -18,7 +18,6 @@ $(window).on('load', function(){
         let date = new Date();
         let min = 1;
         date.setTime(date.getTime()+(min*60*1000));
-        console.log(date.toUTCString())
         document.cookie = "animation=false; expires=" + date + '; path=/';
     }
 
