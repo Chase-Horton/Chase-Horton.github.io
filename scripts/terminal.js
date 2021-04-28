@@ -28,12 +28,12 @@ let x = `oooooo   oooooo     oooo           oooo                                
 \nType help for more information, and to clear this greeting.`
 let greeting =` _    _ ____ __   ___ _____ __  __ ____    ____ _____    __  __ _  _    _____ _  _ __   ____ _  _ ____ 
 ( \\/\\/ ( ___(  ) / __(  _  (  \\/  ( ___)  (_  _(  _  )  (  \\/  ( \\/ )  (  _  ( \\( (  ) (_  _( \\( ( ___)
- )    ( )__) )(_( (__ )(_)( )    ( )__)     )(  )(_)(    )    ( \\  /    )(_)( )  ( )(__ _)(_ )  ( )__) 
+)    ( )__) )(_( (__ )(_)( )    ( )__)     )(  )(_)(    )    ( \\  /    )(_)( )  ( )(__ _)(_ )  ( )__) 
 (__/\\__(____(____\\___(_____(_/\\/\\_(____)   (__)(_____)  (_/\\/\\_)(__)   (_____(_)\\_(____(____(_)\\_(____)
- ____ ____ ____ __  __ ____ _  _   __   __                                                             
+____ ____ ____ __  __ ____ _  _   __   __                                                             
 (_  _( ___(  _ (  \\/  (_  _( \\( ) /__\\ (  )                                                            
-  )(  )__) )   /)    ( _)(_ )  ( /(__)\\ )(__                                                           
- (__)(____(_)\\_(_/\\/\\_(____(_)\\_(__)(__(____)                                                          `
+    )(  )__) )   /)    ( _)(_ )  ( /(__)\\ )(__                                                           
+(__)(____(_)\\_(_/\\/\\_(____(_)\\_(__)(__(____)                                                          `
 console.log(greeting)
 
 function getCookie(cname) {
@@ -41,13 +41,13 @@ function getCookie(cname) {
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
     for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
         c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
+        }
+        if (c.indexOf(name) == 0) {
         return c.substring(name.length, c.length);
-      }
+        }
     }
     return "";
 }
@@ -67,20 +67,49 @@ let files = {
 }
 let repo = {}
 $('#terminalDiv').terminal({
-    help : function(){
+    help : function(cmd){
         if(x != undefined){
             this.clear()
             x = undefined;
         }
+        if(cmd == undefined){
         this.echo(`For more information on any command press type help COMMAND-NAME
 clear   or    CTRL + L  |   Clears the screen
+help COMMAND            |   Returns more information on the command
 ls                      |   Lists files in current directory
 cat FILENAME            |   Prints contents of FILENAME
 touch FILENAME 'CONTENT'|   Create File with FILENAME containing CONTENT (note: content of the file must be in single or double quotes)
 rm FILENAME             |   Deletes FILENAME
 cd LOCATION             |   Change current directory to LOCATION
-mkdir DIR               |   Create a directory with name DIR`
-);
+mkdir DIR               |   Create a directory with name DIR
+git init DIR            |   Commit DIR to local repository
+git status              |   Displays changes in files compared to local and online repository
+git commit              |   Updates local repository with changes
+git checkout            |   Checkout online repository, loads online repository into local repository
+git pull                |   Updates files with content of local repository
+git push                |   Pushes Commits on local repository to online repository
+git restore             |   Restore filesystem to last commit on local repository`
+);} else if(cmd == 'git'){
+    this.echo(`\nIf you are new to git running "git tutorial" will give a more detailed explanation of how to get started using git
+
+"git init": initializes a local repository in the directory specified. If you're new to git, think of a local repository as an area where you can store your files everytime 
+you make an important change, and then later after editing the file you are able to return to these changes, view previous versions of the file, or update your repository
+with your new changes.
+
+"git status": displays all changes made to the local repository compared to the online repository, and below that display all changes made to the directory within your 
+filesystem compared to the files in the local repository.
+
+"git checkout": pulls the files from your online repository, and updates the data of your local repository, can be followed by "git restore" to update filesystem with new files
+but it's simpler to simply use git pull.
+
+"git commit": commit changes in filesystem to local repository
+
+"git pull": similar to git checkout but updates local repository and filesystem
+
+"git push": update online repository with contents of local repository
+
+"git restore": restore filesystem to last commit on local repository`)
+}
     },
     ls : function(){
         if(loc == undefined){
@@ -141,10 +170,11 @@ mkdir DIR               |   Create a directory with name DIR`
         }
     },
     git : function(option, filename){
-        if(option == 'add'){
+        if(option == 'init'){
             if(files[filename]!= undefined){
                 repo[filename] = files[filename]
-                this.echo('Commited ' + filename + ' to your local repository.\nPlease run git push to initialize repository before running git status');
+                document.cookie = "savedData=" + JSON.stringify(repo)+";";
+                this.echo('Commited ' + filename + ' to your local repository and pushed initial commit to online repository.');
             } else{
                 this.echo('Invalid file name.');
             }
@@ -159,52 +189,104 @@ mkdir DIR               |   Create a directory with name DIR`
             document.cookie = "savedData=" + JSON.stringify(repo)+";";
             this.echo('Pushing added files into cookies :)');
         } else if(option == 'status'){
-            //can easily make recursive function that goes into folders by checking if folder in string and fileLocs but for now only prints folders
-            this.echo('Changes to be pushed:')//add to different branches CHANGE THIS TO DISPLAY THE DIFF BETWEEN COOKIE AND REPO AND ALSO DIFF BETWEEN REPO AND FILES
-            let cookie = JSON.parse(getCookie("savedData"));
-            let allFiles = {};
-            for(const folder in repo){
-                Object.assign(allFiles, JSON.parse(JSON.stringify(repo[folder])), JSON.parse(JSON.stringify(cookie[folder])))
-            }
-            for(const folder in repo){
-                this.echo(`-${folder}`)
-                for(const file in allFiles){
-                    if(repo[folder][file] == cookie[folder][file]){
-                        this.echo(` --${file}`);
-                    } else if(cookie[folder][file] == undefined){
-                        this.echo(` --${file} (added)`);
-                    } else if(repo[folder][file] == undefined){
-                        this.echo(` --${file} (removed)`)
-                    } else if(repo[folder][file] != cookie[folder][file]){
-                        this.echo(` --${file} (modified)`)
+            if(Object.keys(repo).length != 0){
+                //can easily make recursive function that goes into folders by checking if folder in string and fileLocs but for now only prints folders
+                this.echo('\nChanges to be pushed:')//add to different branches CHANGE THIS TO DISPLAY THE DIFF BETWEEN COOKIE AND REPO AND ALSO DIFF BETWEEN REPO AND FILES
+                let cookie = JSON.parse(getCookie("savedData"));
+                let allFiles = {};
+                let mods = false;
+                for(const folder in repo){
+                    Object.assign(allFiles, JSON.parse(JSON.stringify(repo[folder])), JSON.parse(JSON.stringify(cookie[folder])));
+                }
+                for(const folder in repo){
+                    this.echo(`-${folder}`);
+                    for(const file in allFiles){
+                        if(repo[folder][file] == cookie[folder][file]){
+                            //this.echo(` --${file}`);
+                        } else if(cookie[folder][file] == undefined){
+                            this.echo(` --${file} (added)`);
+                            mods = true;
+                        } else if(repo[folder][file] == undefined){
+                            this.echo(` --${file} (removed)`);
+                            mods = true;
+                        } else if(repo[folder][file] != cookie[folder][file]){
+                            this.echo(` --${file} (modified)`);
+                            mods = true;
+                        }
+                    }
+                    if(!mods){
+                        this.echo(` --Up to Date`);
                     }
                 }
-            }
-            this.echo('Differences beween repository and files (changes to be commited)')
-            allFiles = {};
-            for(const folder in repo){
-                Object.assign(allFiles, JSON.parse(JSON.stringify(files[folder])), JSON.parse(JSON.stringify(repo[folder])))
-            }
-            for(const folder in repo){
-                this.echo(`-${folder}`)
-                for(const file in allFiles){
-                    if(repo[folder][file] == files[folder][file]){
-                        this.echo(` --${file}`);
-                    } else if(repo[folder][file] == undefined){
-                        this.echo(` --${file} (added)`);
-                    } else if(files[folder][file] == undefined){
-                        this.echo(` --${file} (removed)`)
-                    } else if(repo[folder][file] != files[folder][file]){
-                        this.echo(` --${file} (modified)`)
-                    }
+                this.echo('\nDifferences beween repository and files (changes to be commited)');
+                allFiles = {};
+                mods = false;
+                for(const folder in repo){
+                    Object.assign(allFiles, JSON.parse(JSON.stringify(files[folder])), JSON.parse(JSON.stringify(repo[folder])));
                 }
+                for(const folder in repo){
+                    this.echo(`-${folder}`)
+                    for(const file in allFiles){
+                        if(repo[folder][file] == files[folder][file]){
+                            //this.echo(` --${file}`);
+                        } else if(repo[folder][file] == undefined){
+                            this.echo(` --${file} (added)`);
+                            mods = true;
+                        } else if(files[folder][file] == undefined){
+                            this.echo(` --${file} (removed)`);
+                            mods = true;
+                        } else if(repo[folder][file] != files[folder][file]){
+                            this.echo(` --${file} (modified)`);
+                            mods = true;
+                        }
+                    }
+                    if(!mods){
+                        this.echo(` --Up to Date`);
+                    }
+                    this.echo('')
+                }
+            } else{
+                this.echo('No local repository found, run git checkout to checkout a repository, or type help git for more information on git.');
             }
         } else if(option == 'pull'){
             repo = JSON.parse(getCookie("savedData"));
-            for(const folder in repo){
-                files[folder] = $.extend(true,{},repo[folder]);
+            if(Object.keys(repo).length > 0){
+                console.log(repo)
+                for(const folder in repo){
+                    this.echo('Checked out: ' + folder);
+                }
+                for(const folder in repo){
+                    files[folder] = $.extend(true,{},repo[folder]);
+                    this.echo('Updated folder: ' + folder)
+                }
             }
         } else if(option == 'commit'){
+            let allFiles = {};
+            let mods = false;
+            for(const folder in repo){
+                Object.assign(allFiles, JSON.parse(JSON.stringify(files[folder])), JSON.parse(JSON.stringify(repo[folder])));
+            }
+            for(const folder in repo){
+                this.echo(`Commited changes to ${folder}`)
+                for(const file in allFiles){
+                    if(repo[folder][file] == files[folder][file]){
+                        //this.echo(` --${file}`);
+                    } else if(repo[folder][file] == undefined){
+                        this.echo(` --${file} (added)`);
+                        mods = true;
+                    } else if(files[folder][file] == undefined){
+                        this.echo(` --${file} (removed)`);
+                        mods = true;
+                    } else if(repo[folder][file] != files[folder][file]){
+                        this.echo(` --${file} (modified)`);
+                        mods = true;
+                    }
+                }
+                if(!mods){
+                    this.echo(` --Already up to Date`);
+                }
+                this.echo('')
+            }
             for(const folder in repo){
                 repo[folder] = JSON.parse(JSON.stringify(files[folder]));
             }
@@ -212,11 +294,45 @@ mkdir DIR               |   Create a directory with name DIR`
         } else if(option == 'restore'){
             for(const folder in repo){
                 files[folder] = JSON.parse(JSON.stringify(repo[folder]));
-                this.echo('Restored directory to last commit')
+                this.echo('Restored directory to last commit');
             }
-        }
-        else{
-            this.echo(option + ' is not a valid argument. Type "help git" for more information on git.')
+        } else if(option == 'checkout'){
+            repo = JSON.parse(getCookie("savedData"));
+            if(Object.keys(repo).length > 0){
+                console.log(repo)
+                for(const folder in repo){
+                    this.echo('Checked out: ' + folder);
+                }
+            } else{
+                this.echo('No repository found, run "git init DIR" to initialize a repository at DIR')
+            }
+        } else if(option == 'tutorial'){
+            this.echo(`\nThis git command works similarly, but a bit different than the actual git command because github pages is limited to only static websites,
+therefore all user data is stored in cookies which are limited to 4096 bytes. Because of this git simply acts as a way to save files rather than storing 
+detailed file history as well.
+
+The command "git init" initializes a local repository in the directory specified. If you're new to git, think of a local repository as
+an area where you can store your files everytime you make an important change, and then later after editing the file you are able to return to these changes,
+view previous versions of the file, or update your repository with your new changes.
+
+After you've initialized your repository, and change some files inside of the directory, you may want to run "git status", which will display all changes made to 
+the local repository compared to the online repository, and below that display all changes made to the directory within your filesystem compared to the files 
+in the local repository.
+
+If you want to update your local repository with the data stored within your filesystem you just need
+to type "git commit", and this will update your local repository with all changes made within the directory.
+
+Now that you know how to store data in your local repository, you are able to push this data to the online repository using "git push",
+    where it may be checked out later using "git checkout" or "git pull" after closing or refreshing the browser
+
+"git checkout" pulls the files from your online repository, and updates the data of your local repository, can be followed by "git restore" to update 
+filesystem with new files but it's simpler to simply use git pull.
+
+"git pull" functions similar to git checkout but updates local repository and filesystem
+
+"git restore" restores filesystem to last commit on local repository\n`);
+        } else{
+            this.echo(option + ' is not a valid argument. Type "help git" for more information on git or "git tutorial" for a quick start guide on git.');
         }
     }
     }, 
