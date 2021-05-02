@@ -1,3 +1,10 @@
+.current{
+    text-decoration: underline;
+}
+.navBar{
+    color: white;
+}
+
 #navBarAnimated{
     animation-name: nav;
     animation-duration: 2s;
@@ -8,9 +15,6 @@
 #navBar{
     background-color: #1C1C1C;
     text-shadow: 2px 2px rgb(160, 1, 1);
-}
-.navBar{
-    color: white;
 }
 
 #home{
@@ -43,8 +47,17 @@
     animation-delay: 2.5s;
     animation-fill-mode: backwards;
 }
+#homeCard{
+    animation-name: slideIn;
+    animation-duration: 2s;
+    animation-delay: 3s;
+    animation-fill-mode: backwards;
+}
 
-
+@keyframes slideIn {
+    from{transform: translateX(-1900px);}
+    to{transform: translateX(0px);}
+}
 @keyframes nav {
     from{transform: translateY(-200px)}
     to{transform: translateY(0px)}
@@ -55,7 +68,4 @@
     50%{transform: translate(800px,0px); opacity: 0.5; }
     75% {transform: translate(0px, 0px); opacity: 1; transform:rotate(25deg);}
     100%{text-shadow: 2px 2px rgb(160, 1, 1);}
-}
-.current{
-    text-decoration: underline;
 }
