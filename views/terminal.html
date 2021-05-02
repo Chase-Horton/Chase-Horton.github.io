@@ -16,8 +16,8 @@
 
 </head>
 <body>
-    <div class="h-screen flex-wrap bg-black">
-        <header id="navBar" class="h-20 flex justify-start pt-4 text-2xl rounded-b-2xl">
+    <div class="h-screen bg-gradient-to-br from-red-600 to-red-200 flex flex-col items-center">
+        <header id="navBar" class="h-20 w-full flex justify-start pt-4 text-2xl rounded-b-2xl">
             <div class="navBar flex text-base md:text-3xl">
             <a href="/" class="ml-4 md:ml-8 hover:text-gray-400">Home</a>
             <a href="projects.html" class="ml-4 md:ml-8 hover:text-gray-400">Projects</a>
@@ -27,11 +27,11 @@
             </div>
         </header>
         <!--TERMINAL-->
-        <div class="bg-black w-3/4 h-3/4 mt-14 rounded-lg overflow-hidden shadow-lg">
+        <div id="term" class="bg-black w-3/4 h-3/4 mt-14 rounded-lg overflow-hidden shadow-lg">
             <div id="terminalDiv" class="p-10"></div>
         </div>
         <!--BUTTONS-->
-        <div class="h-screen bg-gradient-to-br from-red-600 to-red-200 flex flex-col items-center">
+        <div id="term-buttons" class="w-3/4 my-4 flex justify-evenly text-2xl">
             <button id="help-button" class="terminal-button bg-red-500 rounded-full active:border-8 border-black">Help</button>
             <button class="terminal-button bg-red-500 rounded-full">More Information</button>
             <button class="terminal-button bg-red-500 rounded-full">See Code on GitHub></button>
