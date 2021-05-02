@@ -28,12 +28,12 @@ let x = `oooooo   oooooo     oooo           oooo                                
 \nType help for more information, and to clear this greeting.`
 let greeting =` _    _ ____ __   ___ _____ __  __ ____    ____ _____    __  __ _  _    _____ _  _ __   ____ _  _ ____ 
 ( \\/\\/ ( ___(  ) / __(  _  (  \\/  ( ___)  (_  _(  _  )  (  \\/  ( \\/ )  (  _  ( \\( (  ) (_  _( \\( ( ___)
-)    ( )__) )(_( (__ )(_)( )    ( )__)     )(  )(_)(    )    ( \\  /    )(_)( )  ( )(__ _)(_ )  ( )__) 
+ )    ( )__) )(_( (__ )(_)( )    ( )__)     )(  )(_)(    )    ( \\  /    )(_)( )  ( )(__ _)(_ )  ( )__) 
 (__/\\__(____(____\\___(_____(_/\\/\\_(____)   (__)(_____)  (_/\\/\\_)(__)   (_____(_)\\_(____(____(_)\\_(____)
-____ ____ ____ __  __ ____ _  _   __   __                                                             
+ ____ ____ ____ __  __ ____ _  _   __   __                                                             
 (_  _( ___(  _ (  \\/  (_  _( \\( ) /__\\ (  )                                                            
-    )(  )__) )   /)    ( _)(_ )  ( /(__)\\ )(__                                                           
-(__)(____(_)\\_(_/\\/\\_(____(_)\\_(__)(__(____)                                                          `
+  )(  )__) )   /)    ( _)(_ )  ( /(__)\\ )(__                                                           
+ (__)(____(_)\\_(_/\\/\\_(____(_)\\_(__)(__(____)                                                          `
 console.log(greeting)
 
 function getCookie(cname) {
@@ -41,13 +41,13 @@ function getCookie(cname) {
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
     for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
         c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
+      }
+      if (c.indexOf(name) == 0) {
         return c.substring(name.length, c.length);
-        }
+      }
     }
     return "";
 }
@@ -66,7 +66,7 @@ let files = {
     }
 }
 let repo = {}
-$('#terminalDiv').terminal({
+let term = $('#terminalDiv').terminal({
     help : function(cmd){
         if(x != undefined){
             this.clear()
@@ -94,7 +94,7 @@ git restore             |   Restore filesystem to last commit on local repositor
 
 "git init": initializes a local repository in the directory specified. If you're new to git, think of a local repository as an area where you can store your files everytime 
 you make an important change, and then later after editing the file you are able to return to these changes, view previous versions of the file, or update your repository
-with your new changes.
+ with your new changes.
 
 "git status": displays all changes made to the local repository compared to the online repository, and below that display all changes made to the directory within your 
 filesystem compared to the files in the local repository.
@@ -337,8 +337,15 @@ filesystem with new files but it's simpler to simply use git pull.
     }
     }, 
     {
-        greetings: x /*'Welcome to my online terminal. Type help for more information...'*/,
+        greetings: greeting + '\n\n Type "help" for more information, and to clear the screen.\n' /*x, 'Welcome to my online terminal. Type help for more information...'*/,
         completion: true,
         checkArity: false,
     }
 );
+
+//BUTTONS
+document.getElementById('help-button').onclick = showHelp;
+function showHelp(){
+    console.log('help');
+    term.exec('help');
+}

@@ -4,7 +4,16 @@
 .navBar{
     color: white;
 }
-
+.terminal-button{
+    color: white;
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.terminal-button:hover{
+    background: #A390E4;
+}
 #navBarAnimated{
     animation-name: nav;
     animation-duration: 2s;
@@ -69,3 +78,4 @@
     75% {transform: translate(0px, 0px); opacity: 1; transform:rotate(25deg);}
     100%{text-shadow: 2px 2px rgb(160, 1, 1);}
 }
+
